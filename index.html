@@ -7,17 +7,32 @@
 </head>
 <body>
     <button onclick={getData()}>Get Data</button>
+    <div id="show"></div>
 </body>
 <script>
+  let myList = "";
   function getData() {
     let myRequest = new XMLHttpRequest();
     myRequest.onreadystatechange = () => {
       if (myRequest.readyState === 4 && myRequest.status === 200) {
-        console.log(myRequest.responseText);
+        const myDataObj = JSON.parse(myRequest.responseText);
+        myDataObj.forEach((element) => {
+          myList +=
+          `
+            <pre>
+              ${element.id} => ${element.title}
+            </pre>
+          `
+          // console.log(myList);
+
+        });
       }
+      document.getElementById("show").innerHTML = myList;
     }
     myRequest.open("GET","https://jsonplaceholder.typicode.com/posts",true);
     myRequest.send();
   }
+  console.log(myList);
+
 </script>
 </html>
