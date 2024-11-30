@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <button onclick={getData()}>Get Data</button>
+</body>
+<script>
+  function getData() {
+    let myRequest = new XMLHttpRequest();
+    myRequest.onreadystatechange = () => {
+      if (myRequest.readyState === 4 && myRequest.status === 200) {
+        console.log(myRequest.responseText);
+      }
+    }
+    myRequest.open("GET","https://jsonplaceholder.typicode.com/posts",true);
+    myRequest.send();
+  }
+</script>
+</html>
